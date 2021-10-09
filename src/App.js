@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import SelectCity from "./components/Selector";
+import WeatherList from "./components/WeatherLists";
+import UseFetch from "./hooks/UseFetch";
 
-function App() {
+const App = () => {
+  const {data, error, isLoading, setUrl} = UseFetch();
+  const apiKey= process.env.REACT_APP_API_KEY;
+  const url= process.env.REACT_APP_BASE_URL;
+  
+  const getContent= () => {
+    if(error) return <h2>{error}</h2>
+    if(!data && isLoading) return <h2>Loading...</h2>
+    if(!data) return null;
+    return <WeatherList weathers={data.list} />
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SelectCity onSearch={(city) => setUrl(`${url}/data/2.5/forecast?q=${city}&cnt=5&appid=${apiKey}&units=metric`)}
+      />
+
+      {getContent()}
     </div>
   );
-}
+};
 
 export default App;
