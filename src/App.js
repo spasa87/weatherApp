@@ -20,8 +20,11 @@ const App = () => {
     <div className="App">
       <SelectCity onSearch={(city) => setUrl(`${url}/data/2.5/forecast?q=${city}&cnt=5&appid=${apiKey}&units=metric`)}
       />
-
-      {getContent()}
+      
+      <div className="cards">
+        {getContent()}
+      </div>
+      
     </div>
   );
 };

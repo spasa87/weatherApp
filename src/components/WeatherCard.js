@@ -4,16 +4,17 @@ const WeatherCard = ({dt, temp_min, temp_max, main, icon}) => {
     const date = new Date(dt);
 
     return (
-        <div style={{width: "15px"}}>
+        <div className="card">
+            <h4>{main}</h4>
+
             <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="imageOfWeather"/>
-            <div>
-                <h4>{main}</h4>
-                <p>
-                    {date.toLocaleDateString()} - {date.toLocaleTimeString()}
-                </p>
-                <p>Min: {temp_min}</p>
-                <p>Max: {temp_max}</p>
-            </div>
+            
+            <p>
+                {date.toLocaleDateString()} - {date.toLocaleTimeString()}
+            </p>
+
+            <p>Min: {temp_min}&#8451;</p>
+            <p>Max: {temp_max}&#8451;</p>
         </div>
     );
 };
